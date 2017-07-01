@@ -1,6 +1,6 @@
 # visual-selection-vim
 
-Simple vim plugin for selection action。
+Simple vim plugin for selection action.
 
 Example：
 
