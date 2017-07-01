@@ -6,10 +6,6 @@ endfunction
 
 function! visual#action(...) range
     let l:saved_reg = @"
-    " redir => message
-    " silent execute 'ls'
-    " redir END
-    " echo message . 11111
     execute "normal! vgvy"
     let l:pattern = escape(@", '\\/.*$^~[]')
     let l:pattern = substitute(l:pattern, "\n$", "", "")
@@ -21,8 +17,22 @@ function! visual#action(...) range
         let l:list[l:cnt] = l:r
     endfor
     let l:cmd_str = join(l:list, " ")
-    echo l:cmd_str
-    call CmdLine(l:cmd_str)
+    exe l:cmd_str 
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
+
+function! visual#replace(direction) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    let l:r = substitute(a:direction, "foo", l:pattern,"")
+    call CmdLine(l:r)
+
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
