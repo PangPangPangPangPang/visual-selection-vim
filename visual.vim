@@ -12,8 +12,9 @@ function! visual#action(...) range
 
     let l:list = copy(a:000)
     for str in l:list
-        let l:r = substitute(str, "foo", l:pattern,"")
-        let l:cnt =  index(l:list, str)
+        let l:str = fnameescape(str)
+        let l:r = substitute(l:str, "foo", l:pattern,"")
+        let l:cnt =  index(l:list, l:str)
         let l:list[l:cnt] = l:r
     endfor
     let l:cmd_str = join(l:list, " ")
