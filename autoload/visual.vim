@@ -1,5 +1,6 @@
-function! CmdLine(str)
-    exe "menu Foo.Bar :" . a:str
+function! visual#cmdLine(str)
+    let l:cmd = 'menu Foo.Bar :' . a:str
+    exe l:cmd
     emenu Foo.Bar
     unmenu Foo
 endfunction 
@@ -39,5 +40,5 @@ function! visual#replace(...) range
         let l:list[l:cnt] = l:r
     endfor
     let l:cmd_str = join(l:list, " ")
-    call CmdLine(l:r)
+    call visual#cmdLine(l:cmd_str)
 endfunction
